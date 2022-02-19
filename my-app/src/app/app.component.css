@@ -1,0 +1,39 @@
+.navigation{
+  background:#1f1f1f;
+  color:white;
+
+  min-height: 10vh;
+}
+
+h1, h2, h3, h4{
+  margin: 0vh;
+  padding: 0vh;
+}
+
+h1{
+  margin-left: 1vw;
+}
+
+.pageContent, body{
+  padding: 0vh;
+  margin: 0vh;
+  border: 0vh;
+
+
+  background:#1f1f1f;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+  min-height: 100vh;
+}
+
+#loginForm{
+  margin-top: 20vh;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  min-height: 50vh;
+  background-color: white;
+  border-radius: 2vh;
+
+  color:black;
+}
