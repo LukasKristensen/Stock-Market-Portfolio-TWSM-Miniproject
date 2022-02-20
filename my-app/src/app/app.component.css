@@ -29,11 +29,39 @@ h1{
 
 #loginForm{
   margin-top: 20vh;
-  margin-left: 20vw;
-  margin-right: 20vw;
+  margin-left: 35vw;
+  margin-right: 35vw;
   min-height: 50vh;
   background-color: white;
   border-radius: 2vh;
 
   color:black;
+}
+
+#loginForm h2, p{
+  text-align: center;
+  padding: 2vh;
+
+}
+
+#loginForm form{
+  margin-left: 10vh;
+  margin-top: 3vh;
+}
+
+#loginForm form input{
+  margin-top: 1vh;
+
+}
+
+#loginForm form button{
+  margin-top: 3vh;
+  margin-left: 15vh;
+}
+
+#underlinedLink{
+  font-size: 2vh;
+  color:black;
+  padding-left: 15vh;
+  text-decoration: underline;
 }
