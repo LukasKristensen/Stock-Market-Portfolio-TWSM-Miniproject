@@ -32,7 +32,7 @@ h1{
   min-height: 100vh;
 }
 
-#loginForm{
+.loginForm{
   color:black;
   font-family: Arial, Helvetica, sans-serif;
 
@@ -40,7 +40,11 @@ h1{
   margin-left: 60vw;
   margin-right: 10vw;
   min-height: 47vh;
-  background-color: #e3e9f5;
+  min-width: 29vw;
+
+  box-shadow: 0vh 0vh 1vh #8a8989;
+  /*  background-color: #e3e9f5;    e7e8e9*/
+  background-color: #e7e8e9;
   border-radius: 2vh;
 }
 
@@ -48,19 +52,19 @@ h2{
   font-size: 3vh;
 }
 
-#loginForm h2, p{
+.loginForm h2, p{
   color:#1f1f1f;
   text-align: center;
   padding: 2vh;
 }
 
-#loginForm form{
+.loginForm form{
   margin-left: 10vh;
   margin-top: 3vh;
   font-size: 2vh;
 }
 
-#loginForm form input{
+.loginForm form input{
   margin-top: 1vh;
   min-height: 3vh;
   min-width: 15vw;
@@ -72,7 +76,7 @@ h2{
   border-style: solid;
 }
 
-#loginForm form button{
+.loginForm form button{
   margin-top: 3vh;
   margin-left: 16vh;
 }
