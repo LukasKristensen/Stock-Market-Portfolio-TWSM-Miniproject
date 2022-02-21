@@ -11,7 +11,12 @@ h1, h2, h3, h4{
 }
 
 h1{
-  margin-left: 1vw;
+  position: absolute;
+  font-size: 7vh;
+
+  margin-top: 5vh;
+  margin-right: 120vh;
+  margin-left: 3vw;
 }
 
 .pageContent, body{
@@ -20,28 +25,36 @@ h1{
   border: 0vh;
 
 
-  background:#1f1f1f;
-  color: white;
+  background:rgb(255, 255, 255);
+  color: #1f1f1f;
   font-family: Georgia, 'Times New Roman', Times, serif;
 
   min-height: 100vh;
 }
 
 #loginForm{
-  margin-top: 20vh;
-  margin-left: 35vw;
-  margin-right: 35vw;
-  min-height: 50vh;
-  background-color: white;
-  border-radius: 2vh;
-
   color:black;
+
+  margin-top: 15vh;
+  margin-left: 55vw;
+  margin-right: 15vw;
+  min-height: 60vh;
+  background-color: rgb(241, 241, 241);
+  border-radius: 1vh;
+  border-width: 1vh;
+  border: 0.5vh solid;
+  border-color: #1f1f1f;
+
+}
+
+
+h2{
+  font-size: 5vh;
 }
 
 #loginForm h2, p{
   text-align: center;
   padding: 2vh;
-
 }
 
 #loginForm form{
