@@ -36,17 +36,16 @@ h1{
   color:black;
   font-family: Arial, Helvetica, sans-serif;
 
-  margin-top: 12vh;
-  margin-left: 57vw;
-  margin-right: 13vw;
-  min-height: 65vh;
+  margin-top: 22vh;
+  margin-left: 60vw;
+  margin-right: 10vw;
+  min-height: 47vh;
   background-color: #e3e9f5;
-  border-radius: 1vh;
-
+  border-radius: 2vh;
 }
 
 h2{
-  font-size: 4vh;
+  font-size: 3vh;
 }
 
 #loginForm h2, p{
@@ -58,17 +57,24 @@ h2{
 #loginForm form{
   margin-left: 10vh;
   margin-top: 3vh;
+  font-size: 2vh;
 }
 
 #loginForm form input{
   margin-top: 1vh;
+  min-height: 3vh;
+  min-width: 15vw;
+  font-size: 2vh;
 
-
+  border-radius: 1vh;
+  border-width: 0.1vh;
+  border-color: rgb(153, 153, 153);
+  border-style: solid;
 }
 
 #loginForm form button{
   margin-top: 3vh;
-  margin-left: 15vh;
+  margin-left: 16vh;
 }
 
 #underlinedLink{
@@ -80,7 +86,36 @@ h2{
 
 #landingFigure{
   position: absolute;
-  margin-top: 50vh;
+  margin-top: 45vh;
   margin-left: 40vh;
-  height: 40vh;
+  height: 45vh;
+}
+
+#emailText{
+  margin-left: 4vh;
+}
+
+.formsBtn{
+  margin-left: 2vw;
+  margin-top: 8vh;
+  padding: 1vh;
+
+  font-size: 2vh;
+  min-height: 5vh;
+  min-width: 5vw;
+  border-style: solid;
+  border-radius: 1vh;
+  border-width: 0.1vh;
+  border-color: rgb(153, 153, 153);
+
+  background-color: white;
+  color: #1f1f1f;
+}
+
+.formsBtn:hover{
+  cursor: pointer;
+}
+
+#margineSignup{
+  margin-left:13vh;
 }
