@@ -46,7 +46,10 @@ h1{
   /*  background-color: #e3e9f5;    e7e8e9*/
   background-color: #e7e8e9;
   border-radius: 2vh;
+
 }
+
+
 
 h2{
   font-size: 3vh;
@@ -62,6 +65,8 @@ h2{
   margin-left: 10vh;
   margin-top: 3vh;
   font-size: 2vh;
+  outline: none;
+
 }
 
 .loginForm form input{
@@ -74,11 +79,17 @@ h2{
   border-width: 0.1vh;
   border-color: rgb(153, 153, 153);
   border-style: solid;
+
 }
 
 .loginForm form button{
   margin-top: 3vh;
   margin-left: 16vh;
+}
+
+.loginForm input, :focus{
+  outline: none;
+
 }
 
 #underlinedLink{
@@ -122,4 +133,8 @@ h2{
 
 #margineSignup{
   margin-left:13vh;
+}
+
+::selection{
+  background-color:#aaaaaa;
 }
