@@ -17,7 +17,7 @@ export class userData {
 export class AppComponent {
   title = 'my-app';
 
-  uData: userData[] = [];
+  uData = [{userName: "", portfolio: ""}];
 
   constructor(
       private serverConnection: HttpClient
