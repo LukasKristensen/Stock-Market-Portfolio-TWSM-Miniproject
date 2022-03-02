@@ -11,6 +11,11 @@ let userData = new mongoose.Schema({
 
 const collection = mongoose.model("userData", userData)
 
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200")
+    next();
+})
+
 app.listen(6060, function(){
     console.log("Server. Port 6060");
 })
