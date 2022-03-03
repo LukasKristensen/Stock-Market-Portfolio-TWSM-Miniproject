@@ -28,7 +28,7 @@ export class AppComponent {
   }
 
   loadServerData(){
-    this.serverConnection.get<any>("http://localhost:6060").subscribe(
+    this.serverConnection.get<any>("http://localhost:6060/authenthicate").subscribe(
       response => {
         console.log("Data:",response);
         this.uData = response;

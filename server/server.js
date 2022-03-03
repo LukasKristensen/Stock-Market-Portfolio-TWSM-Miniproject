@@ -27,3 +27,8 @@ app.get("/", function(req, res){
     });
 })
 
+app.get("/authenthicate", function(req, res){
+    collection.find({userName: 'validUser'}, function (err, docs){
+        console.log("Authenticating...")
+    })
+})
