@@ -20,7 +20,7 @@ app.listen(6060, function(){
     console.log("Server. Port 6060");
 })
 
-app.get("/", function(req, res){
+app.get("/requestData", function(req, res){
     collection.find({userName: 'testUser'}, function (err, docs){
         console.log("Printing:",err, docs)
         res.send(docs);
