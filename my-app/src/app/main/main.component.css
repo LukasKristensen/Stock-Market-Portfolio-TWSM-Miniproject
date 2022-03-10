@@ -5,9 +5,11 @@
   min-height: 10vh;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4, p{
   margin: 0vh;
   padding: 0vh;
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 
 h1{
@@ -19,3 +21,18 @@ h1{
   margin-left: 3vw;
 }
 
+#title{
+  position: absolute;
+  margin-top: 3vh;
+  margin-left: 2vw;
+  font-size: 3vh;
+}
+
+#signOutBtn{
+  position: relative;
+  float: right;
+  font-size: 1.8vh;
+  padding: 8px;
+  margin-top: 2.5vh;
+  margin-right: 2vw;
+}
