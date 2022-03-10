@@ -1,0 +1,21 @@
+.navigation{
+  background:#1f1f1f;
+  color:white;
+
+  min-height: 10vh;
+}
+
+h1, h2, h3, h4{
+  margin: 0vh;
+  padding: 0vh;
+}
+
+h1{
+  position: absolute;
+  font-size: 7vh;
+
+  margin-top: 5vh;
+  margin-right: 120vh;
+  margin-left: 3vw;
+}
+
