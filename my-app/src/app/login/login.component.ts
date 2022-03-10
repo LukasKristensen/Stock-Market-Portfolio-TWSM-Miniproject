@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 
+// To-do: Pass data back to main display component
 
 @Component({
   selector: 'app-login',

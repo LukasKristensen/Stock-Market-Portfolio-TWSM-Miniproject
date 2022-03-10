@@ -1,3 +1,5 @@
+// To-do: Implement Yahoo Fianance API
+
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
