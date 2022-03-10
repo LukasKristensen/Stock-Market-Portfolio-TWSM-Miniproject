@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="pageContent">
+    <div id="navigation">
+      <br>
+      <h1>Optimize Your Portfolio Strategy with Machine Learning</h1>
+    </div>
+    <img src="https://lukaskristensen.github.io/TWSM_LandingFigure.png" alt="test" id="landingFigure">
+
+    <div class="loginForm">
+      <h2>Login</h2>
+      <form>
+        <a id="emailText"> Email: </a>
+        <input type="text">
+        <br>
+        Password:
+        <input type="password">
+        <br>
+        <button class="formsBtn" routerLink="/main-component" routerLinkActive="active">Log-in</button>
+      </form>
+
+      <button class="formsBtn" id="margineSignup">Create Account</button>
+      <button class="formsBtn" >Continue as Guest</button>
+      <p>Server Testing</p>
+      <p>Username: {{uData[0]["userName"]}}</p>
+      <p>Portfolio: {{uData[0]["portfolio"]}}</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export class userData {
-  constructor(
-    public userName: string,
-    public portfolio: string
-  ){}
-}
+
 
 
 @Component({
@@ -15,25 +10,11 @@ export class userData {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'my-app';
-
-  uData = [{userName: "", portfolio: ""}];
+  title = 'my-app'
 
   constructor(
-      private serverConnection: HttpClient
     ) {}
 
   ngOnInit(): void {
-    this.loadServerData();
   }
-
-  loadServerData(){
-    this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
-      response => {
-        console.log("Data:",response);
-        this.uData = response;
-      }
-    )
-  }
-
 }
