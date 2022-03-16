@@ -28,6 +28,16 @@ h1{
   font-size: 3vh;
 }
 
+#manageProfileBtn{
+  position: relative;
+  float: right;
+  font-size: 1.8vh;
+  padding: 8px;
+  margin-top: 2.5vh;
+  margin-right: 2vw;
+}
+
+
 #signOutBtn{
   position: relative;
   float: right;
