@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 export class userData {
   constructor(
     public userName: string,
-    public portfolio: string[],
+    public Portfolio: string[],
   ){}
 }
 
@@ -15,7 +15,7 @@ export class userData {
 })
 export class MainComponent{
 
-  uData = [{userName: "", portfolio: ""}];
+  uData = [{userName: "", Portfolio: ""}];
 
   constructor(
     private serverConnection: HttpClient
