@@ -1,4 +1,5 @@
 // To-do: Implement Yahoo Fianance API
+// To-do: Implement session key to verify connection
 
 const express = require("express");
 const mongoose = require("mongoose");
