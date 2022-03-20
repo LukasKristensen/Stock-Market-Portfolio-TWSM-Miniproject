@@ -2,6 +2,7 @@
 // To-do: Display API data with AJAX
 // To-do: Hash and salt user data
 // To-do: Create a search bar for stocks
+// To-do: Explore the 4 elements of network security mentioned at the Mini-Project Feedback Session
 
 const express = require("express");
 const mongoose = require("mongoose");
