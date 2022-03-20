@@ -62,7 +62,13 @@ app.get("/authenthicate", function(req, res){
     })
 })
 
-app.get("/apiTest", function(req, res){
-    console.log("test");
-    
+app.get("/tickerGet", function(req, res){
+    console.log("Loading ticker data");
+
+    options.params.ticker_symbol = 'AAPL'
+    axios.request(options).then(function (response){
+        console.log(response.data);
+    }).catch(function (err){
+        console.log("Error:",err);
+    })
 })
