@@ -25,6 +25,9 @@ app.listen(6060, function(){
 app.get("/requestData", function(req, res){
     collection.find({userName: 'testUser'}, function (err, docs){
         console.log("Printing:",err, docs)
+        console.log("Length:",docs.length)
+        testHold = docs[0]['portfolio'].toObject();
+        console.log("Length2:", testHold.ticker)
         res.send(docs);
     });
 })

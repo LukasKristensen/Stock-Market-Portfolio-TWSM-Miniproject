@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 export class userData {
   constructor(
     public userName: string,
-    public portfolio: string
+    public portfolio: string[],
   ){}
 }
 
