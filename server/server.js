@@ -3,6 +3,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+var yahooFinance = require("yahoo-finance");
 
 mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl.mongodb.net/twsmProject", { useNewUrlParser: true}, {useUnifiedTopology: true})
 
@@ -26,6 +27,14 @@ app.get("/requestData", function(req, res){
     collection.find({userName: 'testUser'}, function (err, docs){
         console.log("Printing:",err, docs)
         res.send(docs);
+
+        yahooFinance.historical({
+            symbol: 'CNDX.L',
+            from: '2022-01-01',
+            to: '2022-03-01',
+            },function(err, quotes){
+                console.log(quotes);
+        });
     });
 })
 
