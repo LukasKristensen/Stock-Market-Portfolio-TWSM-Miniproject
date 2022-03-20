@@ -1,5 +1,7 @@
-// To-do: Implement Yahoo Fianance API
 // To-do: Implement session key to verify connection
+// To-do: Display API data with AJAX
+// To-do: Hash and salt user data
+// To-do: Create a search bar for stocks
 
 const express = require("express");
 const mongoose = require("mongoose");
