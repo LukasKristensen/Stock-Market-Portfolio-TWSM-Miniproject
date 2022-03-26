@@ -22,14 +22,14 @@ const collection = mongoose.model("userData", userData)
 
 
 // Finance API
-// The next 8 lines of code are generated from the documentation at: https://rapidapi.com/lattice-data-lattice-data-default/api/stock-market-data/
+// The next 8 lines of code are generated from the API documentation at: https://rapidapi.com/alphavantage/api/alpha-vantage/
 var options = {
     method: 'GET',
-    url: 'https://stock-market-data.p.rapidapi.com/stock/quote',
-    params: {ticker_symbol: 'MSFT'},
+    url: 'https://alpha-vantage.p.rapidapi.com/query',
+    params: {function: 'GLOBAL_QUOTE', symbol: 'MSFT', datatype: 'json'},
     headers: {
-      'x-rapidapi-host': 'stock-market-data.p.rapidapi.com',
-      'x-rapidapi-key': '25f9e821c4msh4c2a74250c635d7p135234jsn8794cb0dff14'
+      'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+      'X-RapidAPI-Key': '25f9e821c4msh4c2a74250c635d7p135234jsn8794cb0dff14'
     }
   };
 
@@ -66,7 +66,7 @@ app.get("/authenthicate", function(req, res){
 app.get("/tickerGet", function(req, res){
     console.log("Loading ticker data");
 
-    options.params.ticker_symbol = 'AAPL'
+    options.params.symbol = 'AAPL'
     axios.request(options).then(function (response){
         console.log(response.data);
     }).catch(function (err){
