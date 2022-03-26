@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as jQuery from 'jquery';
 
 export class userData {
   constructor(
@@ -13,7 +14,8 @@ export class userData {
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent{
+
+export class MainComponent implements OnInit{
 
   uData = [{userName: "", Portfolio: ""}];
 
@@ -21,11 +23,13 @@ export class MainComponent{
     private serverConnection: HttpClient
   ){}
 
-  // Comment out to disable API requests: Limit resources on API subscription
-  /*
   ngOnInit(): void {
-    this.loadServerData();
-  }*/
+    //this.loadServerData();
+    const btnInfo = document.querySelector("#closeInfo");
+    btnInfo?.addEventListener("click", this.test)
+
+
+  }
 
   loadServerData(){
     this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
@@ -35,5 +39,10 @@ export class MainComponent{
       }
     )
   }
+
+  test(){
+    alert("jQuery works!");
+  }
+
 
 }
