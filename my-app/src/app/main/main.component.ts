@@ -21,9 +21,11 @@ export class MainComponent{
     private serverConnection: HttpClient
   ){}
 
+  // Comment out to disable API requests: Limit resources on API subscription
+  /*
   ngOnInit(): void {
     this.loadServerData();
-  }
+  }*/
 
   loadServerData(){
     this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
