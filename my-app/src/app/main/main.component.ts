@@ -23,12 +23,13 @@ export class MainComponent implements OnInit{
     private serverConnection: HttpClient
   ){}
 
+
   ngOnInit(): void {
     //this.loadServerData();
-    const btnInfo = document.querySelector("#closeInfo");
-    btnInfo?.addEventListener("click", this.test)
-
-
+    document.querySelector("#closeInfo")?.addEventListener("click", function(){
+      const btnInfo = document.querySelector(".infoNav");
+      btnInfo?.remove();
+    })
   }
 
   loadServerData(){
@@ -39,10 +40,4 @@ export class MainComponent implements OnInit{
       }
     )
   }
-
-  test(){
-    alert("jQuery works!");
-  }
-
-
 }
