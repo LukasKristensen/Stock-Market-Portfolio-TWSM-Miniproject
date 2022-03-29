@@ -9,6 +9,8 @@ const mongoose = require("mongoose");
 const app = express();
 var axios = require("axios").default;
 
+// Replace api med python yahoofinance?
+
 
 // Database
 mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl.mongodb.net/twsmProject", { useNewUrlParser: true}, {useUnifiedTopology: true})
