@@ -75,3 +75,16 @@ app.get("/tickerGet", function(req, res){
         console.log("Error:",err);
     })
 })
+
+app.get("/login", function(req, res){
+    console.log("Login: Received request")
+    collection.find({userName: 'validUser'}, function (err, docs){
+        console.log("Authenticating...")
+    })
+
+
+})
+
+app.get("/signUp", function(req, res){
+    console.log("Sign-up: Received request")
+})
