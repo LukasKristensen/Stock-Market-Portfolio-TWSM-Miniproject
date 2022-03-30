@@ -78,8 +78,15 @@ app.get("/tickerGet", function(req, res){
 
 app.get("/login", function(req, res){
     console.log("Login: Received request")
-    collection.find({userName: 'validUser'}, function (err, docs){
-        console.log("Authenticating...")
+    collection.find({userName: 'testUser'}, function (err, docs){
+        if(docs.length == 0){
+            console.log("User does not exist in database");
+            res.send("Could not email")
+        }
+        else{
+            console.log("User found!")
+            res.send("User found!")
+        }
     })
 
 
