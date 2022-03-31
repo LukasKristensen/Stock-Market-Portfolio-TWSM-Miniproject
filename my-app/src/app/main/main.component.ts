@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as jQuery from 'jquery';
 
 export class userData {
   constructor(
@@ -25,7 +24,7 @@ export class MainComponent implements OnInit{
 
 
   ngOnInit(): void {
-    //this.loadServerData();
+    // this.loadServerData();
     document.querySelector("#closeInfo")?.addEventListener("click", function(){
       const btnInfo = document.querySelector(".infoNav");
       btnInfo?.remove();

@@ -1,7 +1,14 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // To-do: Pass data back to main display component
+export class userData {
+  constructor(
+    public userName: string,
+    public Portfolio: string[],
+  ){}
+}
+
 
 @Component({
   selector: 'app-login',
@@ -10,33 +17,31 @@ import { HttpClient } from '@angular/common/http';
 })
 
 
-
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   title = 'my-app';
+
+  uData = [{userName: "", Portfolio: ""}];
 
   constructor(
     private serverConnection: HttpClient
   ){}
 
 
-
   ngOnInit(): void {
-    document.querySelector(".margineSignup")?.addEventListener("click", function(){
-
-    })
+    var signUpBtn = document.querySelector("#margineSignup");
+    signUpBtn?.addEventListener('click', this.loadServerData);
   }
 
-  test = document.querySelector('test');
 
 
-  loginUser(){
-    var emailUser = document.querySelector("#emailInput");
-    var passwordUser = document.querySelector("passwordInput");
-
-    console.log("Email:",emailUser,"Password:",passwordUser);
-
-    this.serverConnection.get<any>("http://localhost:6060/login?"+emailUser).subscribe(
+  loadServerData(){
+    var signUpBtn = document.querySelector("#margineSignup");
+    signUpBtn!.innerHTML = "Server request";
+    this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
       response => {
+        console.log("Data:",response);
+        this.uData = response;
       }
     )}
+
 }
