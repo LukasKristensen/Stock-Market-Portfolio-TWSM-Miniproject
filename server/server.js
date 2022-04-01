@@ -46,6 +46,7 @@ app.listen(6060, function(){
 })
 
 app.get("/requestData", function(req, res){
+    console.log("Received request");
     collection.find({userName: 'testUser'}, function (err, docs){
         console.log("Printing:",err, docs)
 

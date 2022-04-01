@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // To-do: Pass data back to main display component
@@ -17,8 +17,10 @@ export class userData {
 })
 
 
-export class LoginComponent implements OnInit {
+export class LoginComponent{
   title = 'my-app';
+
+  response: any;
 
   uData = [{userName: "", Portfolio: ""}];
 
@@ -27,11 +29,14 @@ export class LoginComponent implements OnInit {
   ){}
 
 
-  ngOnInit(): void {
-    var signUpBtn = document.querySelector("#margineSignup");
-    signUpBtn?.addEventListener('click', this.loadServerData);
+
+  signUp(){
+    this.serverConnection.get('https://localhost:6060/signUp?test');
   }
 
+  login(){
+    this.serverConnection.get('https://localhost:6060/login?test')
+  }
 
 
   loadServerData(){
