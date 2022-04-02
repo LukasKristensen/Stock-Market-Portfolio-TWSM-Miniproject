@@ -31,11 +31,11 @@ export class LoginComponent{
 
 
   signUp(){
-    this.serverConnection.get('https://localhost:6060/signUp?test');
+    this.serverConnection.get('http://localhost:6060/signUp?test');
   }
 
   login(){
-    this.serverConnection.get('https://localhost:6060/login?test')
+    this.serverConnection.get('http://localhost:6060/login?test')
   }
 
 
