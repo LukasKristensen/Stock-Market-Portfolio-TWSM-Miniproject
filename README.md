@@ -1,11 +1,11 @@
 # Stock-Market-Portfolio-TWSM-Miniproject
+<h2>Introduction</h2>
 A full-stack stock portfolio for the 6th semester course: Technologies for Web and Social Media
 
-Have Node.JS installed
 
-``npm install mongoose``<br>
-``npm install angular``<br>
-``npm install express``
+<h2>Instructions:</h2>
+
+Have Node.JS installed
 
 Commands for running applicaiton:
 - Front-end<br>
@@ -15,3 +15,6 @@ Run the command: ``ng serve``
 - Back-end<br>
 Direct to: ``\server``<br>
 Run the command: ``node server.js``
+
+<h2>Group</h2>
+Lukas Bisgaard Kristensen
