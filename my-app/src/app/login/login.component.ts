@@ -35,7 +35,10 @@ export class LoginComponent{
     const body = JSON.stringify({"person":1,"test":2});
 
     const req = this.serverConnection.post('http://localhost:6060/signUp', body, {'headers':headers});
-    req.subscribe();
+    req.subscribe(data => {
+      var signUpBtn = document.querySelector("#margineSignup");
+      signUpBtn!.innerHTML = JSON.stringify(data);
+    });
   }
 
   login(){

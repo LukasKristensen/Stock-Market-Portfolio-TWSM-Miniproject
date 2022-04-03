@@ -7,7 +7,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-var axios = require("axios").default;
+var axios = require("axios");
 
 // Replace api med python yahoofinance?
 
@@ -50,7 +50,6 @@ app.get("/requestData", function(req, res){
     console.log("Received request");
     collection.find({userName: 'testUser'}, function (err, docs){
         console.log("Printing:",err, docs)
-
         axios.request(options).then(function (response){
             console.log(response.data);
         }).catch(function (err){
@@ -94,7 +93,9 @@ app.get("/login", function(req, res){
 
 })
 
-app.post("/signUp", (req, res) => {
+app.post("/signUp", (req, res, next) => {
     console.log("Sign-up: Received request")
     console.log(req.header)
+    res.json({'feedback':'Found!'})
+    //next();
 })
