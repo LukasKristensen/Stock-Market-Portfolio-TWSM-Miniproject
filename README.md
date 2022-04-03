@@ -16,5 +16,8 @@ Run the command: ``ng serve``
 Direct to: ``\server``<br>
 Run the command: ``node server.js``
 
+Note: The finance API key must only be used for personal/non-commercial use
+
 <h2>Group</h2>
 Lukas Bisgaard Kristensen
+
