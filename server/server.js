@@ -38,6 +38,7 @@ var options = {
 
 app.use(function(req, res, next){
     res.header("Access-Control-Allow-Origin", "http://localhost:4200")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
     next();
 })
 
@@ -93,6 +94,7 @@ app.get("/login", function(req, res){
 
 })
 
-app.get("/signUp", function(req, res){
+app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
+    console.log(req.header)
 })
