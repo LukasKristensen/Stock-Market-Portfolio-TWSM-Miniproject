@@ -1,16 +1,18 @@
 // To-do: Implement session key to verify connection
 // To-do: Display API data with AJAX
 // To-do: Hash and salt user data
-// To-do: Create a search bar for stocks
+// To-do: Create a search bar for stocks (Probably won't be implemented in this version due to API limitations)
 // To-do: Explore the 4 elements of network security mentioned at the Mini-Project Feedback Session
+
+// To-do: Login function -> User Post Request -> Server Verify on Database -> Return response and set login to true
+// To-do: Sign-up function -> Encode user credentials -> Store on database -> Return response status. Check if already exists.
+// To-do: Create portfolio management -> Add positions (Ticker, amount, date, price) -> Remove positions -> Edit positions
 
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 var axios = require("axios");
 const xml = require("xml");
-
-// Replace api med python yahoofinance?
 
 
 // Database
@@ -94,14 +96,16 @@ app.get("/login", function(req, res){
 
 })
 
-app.post("/signUp", (req, res, next) => {
+app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
     console.log(req.header)
     res.json({'feedback':'Found!'})
-    //next();
 })
 
+
 app.get("/ajaxPost", (req, res, next) => {
+    // Load MongoDB Data + fetch with finance API ticker data
+
     let data = `<?xml version="1.0" encoding"UTF-8"?>`;
     data += "<h1>Hi!</h1>"
 
