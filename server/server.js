@@ -8,6 +8,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 var axios = require("axios");
+const xml = require("xml");
 
 // Replace api med python yahoofinance?
 
@@ -100,7 +101,13 @@ app.post("/signUp", (req, res, next) => {
     //next();
 })
 
-app.get("ajaxPost", (req, res, next) => {
+app.get("/ajaxPost", (req, res, next) => {
+    let data = `<?xml version="1.0" encoding"UTF-8"?>`;
+    data += "<h1>Hi!</h1>"
+
+    var dataTest = [{h2: 'Hello World!'}]
+
     console.log("AJAX Received")
-    next()
+    res.header('Content-Type', 'application/xml');
+    res.status(200).send(xml(dataTest));
 })
