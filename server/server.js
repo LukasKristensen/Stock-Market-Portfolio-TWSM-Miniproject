@@ -99,3 +99,8 @@ app.post("/signUp", (req, res, next) => {
     res.json({'feedback':'Found!'})
     //next();
 })
+
+app.get("ajaxPost", (req, res, next) => {
+    console.log("AJAX Received")
+    next()
+})

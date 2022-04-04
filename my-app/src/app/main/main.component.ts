@@ -39,4 +39,16 @@ export class MainComponent implements OnInit{
       }
     )
   }
+
+  //AJAX Request structure made based on: https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp
+  ajaxRequest(){
+    var ajaxReq = new XMLHttpRequest();
+    ajaxReq.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200){
+        document.getElementById('.ajaxRequest')!.innerHTML = this.response;
+      }
+    };
+    ajaxReq.open('GET', '', true);
+    ajaxReq.send();
+  }
 }
