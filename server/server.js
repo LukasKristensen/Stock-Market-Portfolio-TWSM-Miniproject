@@ -49,36 +49,6 @@ app.listen(6060, function(){
     console.log("Server. Port 6060");
 })
 
-app.get("/requestData", function(req, res){
-    console.log("Received request");
-    collection.find({userName: 'testUser'}, function (err, docs){
-        console.log("Printing:",err, docs)
-        axios.request(options).then(function (response){
-            console.log(response.data);
-        }).catch(function (err){
-            console.log("Error:",err);
-        })
-
-        res.send(docs);
-    });
-})
-
-app.get("/authenthicate", function(req, res){
-    collection.find({userName: 'validUser'}, function (err, docs){
-        console.log("Authenticating...")
-    })
-})
-
-app.get("/tickerGet", function(req, res){
-    console.log("Loading ticker data");
-
-    options.params.symbol = 'AAPL'
-    axios.request(options).then(function (response){
-        console.log(response.data);
-    }).catch(function (err){
-        console.log("Error:",err);
-    })
-})
 
 app.get("/login", function(req, res){
     console.log("Login: Received request")
@@ -114,4 +84,31 @@ app.get("/ajaxPost", (req, res, next) => {
     console.log("AJAX Received")
     res.header('Content-Type', 'application/xml');
     res.status(200).send(xml(dataTest));
+})
+
+app.get("/requestData", function(req, res){
+    // AJAX Request => Append positions to client
+
+    console.log("Received request");
+    collection.find({userName: 'testUser'}, function (err, docs){
+        console.log("Printing:",err, docs)
+        axios.request(options).then(function (response){
+            console.log(response.data);
+        }).catch(function (err){
+            console.log("Error:",err);
+        })
+
+        res.send(docs);
+    });
+})
+
+app.get("/tickerGet", function(req, res){
+    console.log("Loading ticker data");
+
+    options.params.symbol = 'AAPL'
+    axios.request(options).then(function (response){
+        console.log(response.data);
+    }).catch(function (err){
+        console.log("Error:",err);
+    })
 })
