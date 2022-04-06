@@ -8,6 +8,8 @@
 // To-do: Sign-up function -> Encode user credentials -> Store on database -> Return response status. Check if already exists.
 // To-do: Create portfolio management -> Add positions (Ticker, amount, date, price) -> Remove positions -> Edit positions
 
+// To-do: Prevent code being sent as exectable code: By forcing the server to read it as characters on receive
+
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
