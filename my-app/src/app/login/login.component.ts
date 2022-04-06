@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, CanActivate } from '@angular/router';
-
-// To-do: Pass data back to main display component
-export class userData {
-  constructor(
-    public userName: string,
-    public Portfolio: string[],
-  ){}
-}
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +10,6 @@ export class userData {
 
 export class LoginComponent{
   title = 'my-app';
-
-  uData = [{userName: "", Portfolio: ""}];
 
   constructor(
     private serverConnection: HttpClient,
@@ -55,16 +44,4 @@ export class LoginComponent{
       }
     });
   }
-
-
-  loadServerData(){
-    var signUpBtn = document.querySelector("#margineSignup");
-    signUpBtn!.innerHTML = "Server request";
-    this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
-      response => {
-        console.log("Data:",response);
-        this.uData = response;
-      }
-    )}
-
 }
