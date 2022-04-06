@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, CanActivate } from '@angular/router';
 
 // To-do: Pass data back to main display component
 export class userData {
@@ -16,16 +17,14 @@ export class userData {
   styleUrls: ['./login.component.css']
 })
 
-
 export class LoginComponent{
   title = 'my-app';
-
-  response: any;
 
   uData = [{userName: "", Portfolio: ""}];
 
   constructor(
-    private serverConnection: HttpClient
+    private serverConnection: HttpClient,
+    private router: Router
   ){}
 
 
@@ -49,8 +48,12 @@ export class LoginComponent{
     const headers = {'content-type': 'application/json'}
     const bodyPost = {userEmail: emailGet, userPassword: passwordGet};
 
-    const req = this.serverConnection.post('http://localhost:6060/login', bodyPost, {'headers':headers});
-    req.subscribe(data => {});
+    const req = this.serverConnection.post<any>('http://localhost:6060/login', bodyPost, {'headers':headers});
+    req.subscribe(response => {
+      if (response.status == "User found"){
+        this.router.navigate(['main-component'])
+      }
+    });
   }
 
 

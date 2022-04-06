@@ -64,12 +64,13 @@ app.post("/login", function(req, res){
         if(docs.length == 0){
             // Print error: User not found
             console.log("User does not exist in database");
-            res.send("Could not email")
+            res.send({"status":"User does not exist in database"})
         }
         else{
             // Direct user to main page
-            console.log("User found!")
-            res.send("User found!")
+            console.log("Login: User found!")
+            res.send({"status":"User found"})
+            //res.redirect('/main-component')
         }
     })
 
