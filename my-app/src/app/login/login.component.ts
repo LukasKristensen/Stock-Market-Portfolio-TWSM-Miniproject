@@ -29,12 +29,15 @@ export class LoginComponent{
   ){}
 
 
-
   signUp(){
-    const headers = {'content-type': 'application/json'}
-    const body = JSON.stringify({"person":1,"test":2});
+    var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
+    var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
 
-    const req = this.serverConnection.post('http://localhost:6060/signUp', body, {'headers':headers});
+    const headers = {'content-type': 'application/json'}
+    const bodyPost = {userEmail: emailGet, userPassword: passwordGet};
+
+
+    const req = this.serverConnection.post('http://localhost:6060/signUp', bodyPost, {'headers':headers});
     req.subscribe(data => {
       var signUpBtn = document.querySelector("#margineSignup");
       signUpBtn!.innerHTML = JSON.stringify(data);

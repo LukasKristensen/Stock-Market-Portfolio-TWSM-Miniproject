@@ -13,6 +13,8 @@ const mongoose = require("mongoose");
 const app = express();
 var axios = require("axios");
 const xml = require("xml");
+const bodyparse = require('body-parser')
+
 
 
 // Database
@@ -45,6 +47,9 @@ app.use(function(req, res, next){
     next();
 })
 
+app.use(bodyparse.json())
+app.use(bodyparse.urlencoded({ extended: true}))
+
 app.listen(6060, function(){
     console.log("Server. Port 6060");
 })
@@ -63,12 +68,11 @@ app.get("/login", function(req, res){
         }
     })
 
-
 })
 
 app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
-    console.log(req.header)
+    console.log(req.body)
     res.json({'feedback':'Found!'})
 })
 
