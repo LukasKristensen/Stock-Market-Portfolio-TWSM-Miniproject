@@ -60,10 +60,12 @@ app.post("/login", function(req, res){
     console.log(req.body)
     collection.find({userName: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
+            // Print error: User not found
             console.log("User does not exist in database");
             res.send("Could not email")
         }
         else{
+            // Direct user to main page
             console.log("User found!")
             res.send("User found!")
         }
@@ -78,10 +80,12 @@ app.post("/signUp", (req, res) => {
 
     collection.find({userName: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
+            // Create user in database
             console.log("User does not exist in database");
             res.send("Could not email")
         }
         else{
+            // Print error message: A user with the mail already exists
             console.log("User found!")
             res.send("User found!")
         }
