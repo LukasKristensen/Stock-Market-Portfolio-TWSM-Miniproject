@@ -33,19 +33,24 @@ export class LoginComponent{
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
     var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
 
+    // ENCRYPT DATA
     const headers = {'content-type': 'application/json'}
     const bodyPost = {userEmail: emailGet, userPassword: passwordGet};
 
-
     const req = this.serverConnection.post('http://localhost:6060/signUp', bodyPost, {'headers':headers});
-    req.subscribe(data => {
-      var signUpBtn = document.querySelector("#margineSignup");
-      signUpBtn!.innerHTML = JSON.stringify(data);
-    });
+    req.subscribe(data => {});
   }
 
   login(){
-    this.serverConnection.get('http://localhost:6060/login?test')
+    var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
+    var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
+
+    // ENCRYPT DATA
+    const headers = {'content-type': 'application/json'}
+    const bodyPost = {userEmail: emailGet, userPassword: passwordGet};
+
+    const req = this.serverConnection.post('http://localhost:6060/login', bodyPost, {'headers':headers});
+    req.subscribe(data => {});
   }
 
 

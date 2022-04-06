@@ -55,9 +55,9 @@ app.listen(6060, function(){
 })
 
 
-app.get("/login", function(req, res){
+app.post("/login", function(req, res){
     console.log("Login: Received request")
-    collection.find({userName: 'testUser'}, function (err, docs){
+    collection.find({userName: req.body.userMail}, function (err, docs){
         if(docs.length == 0){
             console.log("User does not exist in database");
             res.send("Could not email")
