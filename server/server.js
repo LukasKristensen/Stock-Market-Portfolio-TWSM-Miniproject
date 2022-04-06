@@ -85,12 +85,12 @@ app.post("/signUp", (req, res) => {
         if(docs.length == 0){
             // Create user in database
             console.log("User does not exist in database");
-            res.send("Could not email")
+            res.send({"status":"Could not find email"})
         }
         else{
             // Print error message: A user with the mail already exists
             console.log("User found!")
-            res.send("User found!")
+            res.send({"status":"User found"})
         }
     })
 })

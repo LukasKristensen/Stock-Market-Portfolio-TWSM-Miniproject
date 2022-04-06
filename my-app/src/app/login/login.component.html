@@ -16,18 +16,18 @@
 
     <div class="loginForm">
       <h2>Login</h2>
-      <form>
+      <div id="loginFormDiv">
         <a id="emailText"> Email: </a>
         <input id="emailInput" type="text">
         <br>
         Password:
         <input id="passwordInput" type="password">
         <br>
-      </form>
       <button class="formsBtn" id="loginBtn" (click)="login()">Log-in</button>
+    </div>
     <!-- To-do: Encrypt data on .sendToServer() -->
-      <button class="formsBtn" id="margineSignup" (click)="signUp()">Create Account</button>
-      <button class="formsBtn" id="signUp">Continue as Guest</button>
+    <button class="formsBtn" id="margineSignup" (click)="signUp()">Create Account</button>
+    <button class="formsBtn" id="signUp">Continue as Guest</button>
     </div>
 </div>
 </body>
