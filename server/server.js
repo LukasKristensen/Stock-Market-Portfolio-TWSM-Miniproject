@@ -74,7 +74,7 @@ app.post("/login", function(req, res){
 app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
     console.log(req.body)
-    res.json({'feedback':'Found!'})
+    // res.json({'feedback':'Found!'})
 
     collection.find({userName: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
