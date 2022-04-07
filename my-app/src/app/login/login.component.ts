@@ -39,13 +39,13 @@ export class LoginComponent{
     const req = this.serverConnection.post<any>('http://localhost:6060/login', bodyPost, {'headers':headers});
     req.subscribe(response => {
       switch (response.status){
-        case 'User found':
+        case 'Login successful':
           this.router.navigate(['main-component'])
           break
         case 'User does not exist':
           document.getElementById("debugStatus")!.innerHTML = "Could not find a user with the given email"
           break
-        case 'Wrong password':
+        case 'Password incorrect':
           document.getElementById("debugStatus")!.innerHTML = "Wrong password"
           break
         default:

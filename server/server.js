@@ -58,19 +58,23 @@ app.listen(6060, function(){
 
 
 app.post("/login", function(req, res){
+    
     console.log("Login: Received request",req.body)
-
     console.log(crypto.createHash('SHA256').update("thisisagoodpassword123").digest('hex'))
 
-    collection.find({email: req.body.userEmail}, function (err, docs){
+    collection.findOne({email: req.body.userEmail}, function (err, docs){
+        console.log(docs)
         if(docs.length == 0){
             console.log("User does not exist in database");
             res.send({"status":"User does not exist"})
         }
         else{
-            console.log(docs)
-            console.log("Login: User found")
-            res.send({"status":"User found"})
+            if (docs.password == req.body.userPassword){
+                res.send({"status":"Login successful"})
+            }
+            else{
+                res.send({"status":"Password incorrect"})
+            }
         }
     })
 
