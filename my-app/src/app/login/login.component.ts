@@ -27,8 +27,17 @@ export class LoginComponent{
     const headers = {'content-type': 'application/json'}
     const bodyPost = {userEmail: emailGet, userPassword: encryptPassword.toString()};
 
-    const req = this.serverConnection.post('http://localhost:6060/signUp', bodyPost, {'headers':headers});
-    req.subscribe(data => {});
+    const req = this.serverConnection.post<any>('http://localhost:6060/signUp', bodyPost, {'headers':headers});
+    req.subscribe(response => {
+      switch (response.status){
+        case 'Created account':
+          document.getElementById("debugStatus")!.innerHTML = " "
+          document.getElementById("feedbackStatus")!.innerHTML = "Account created!"
+          break;
+        default:
+          document.getElementById("debugStatus")!.innerHTML = "Email already linked to an existing account"
+      }
+    });
   }
 
   login(){
@@ -39,7 +48,6 @@ export class LoginComponent{
 
     const checkCredentials = this.serverConnection.post<any>('http://localhost:6060/loginCheck', {userEmail: emailGet}, {'headers':headers})
     checkCredentials.subscribe(response => {
-      document.getElementById("debugStatus")!.innerHTML = JSON.stringify(response.status)
       switch(response.status){
         case 'User exists':
           this.verifyLogin(response.randomSalt)
