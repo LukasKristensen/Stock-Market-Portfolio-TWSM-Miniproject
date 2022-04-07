@@ -25,7 +25,7 @@ mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl
 let userData = new mongoose.Schema({
     email: {type: String},
     password: {type: String},
-    serverHash: {type: String}
+    serverSalt: {type: String}
 })
 
 const collection = mongoose.model("userData", userData)
@@ -59,49 +59,41 @@ app.listen(6060, function(){
 
 app.post('/loginCheck', function(req, res){
     console.log("Login: Checking if user exists",req.body)
-    collection.findOneAndUpdate({email: 'lbkr19@student.aau.dk'}, {$set: {serverHash: 'someUpdate'}}, (err, docs) => {
-        if (err){
-            console.log(err)
-        }
-        else{
-            console.log(docs)
-        }
-    }), 
-    console.log("Updated... Mongo")
-
-    res.send({"status":"Login credentials false"})
-
-    /*
-    collection.findOne({email: req.body.userEmail}, function (err, docs){
-        console.log(docs)
-        if(docs == null){
-            console.log("User does not exist in database");
-            //res.send({"status":"User does not exist"})
-        }
-        else if (docs.email == req.body.userEmail){
-            console.log("True. Returning salt")
-            var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
-            
-            //res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
-        }
-        else{
-            //res.send({"status":"Login credentials false"})
-        }
-    })*/
-})
-
-app.post("/loginVerify", function(req, res){
-    console.log("Login: Received request",req.body)
-    console.log(crypto.createHash('SHA256').update("thisisagoodpassword123").digest('hex'))
-
+    
     collection.findOne({email: req.body.userEmail}, function (err, docs){
         console.log(docs)
         if(docs == null){
             console.log("User does not exist in database");
             res.send({"status":"User does not exist"})
         }
+        else if (docs.email == req.body.userEmail){
+            console.log("True. Returning salt")
+            var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
+            collection.findOneAndUpdate({email: 'lbkr19@student.aau.dk'}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
+                if (err){
+                    console.log(err)
+                }})
+            res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
+        }
         else{
-            if (docs.password == req.body.userPassword){
+            res.send({"status":"Login credentials false"})
+        }
+    })
+})
+
+app.post("/loginVerify", function(req, res){
+    console.log("Login: Received request",req.body)
+
+    collection.findOne({email: req.body.userEmail}, function (err, docs){
+        if(docs == null){
+            console.log("User does not exist in database");
+            res.send({"status":"User does not exist"})
+        }
+        else{
+            hashedPasswordSalt = crypto.createHash('SHA256').update(docs.password+docs.serverSalt+req.body.clientSalt).digest('hex')
+            console.log("Comparing Server:",hashedPasswordSalt)
+            console.log("Comparing Client:",req.body.hashedPassword)
+            if (req.body.hashedPassword == hashedPasswordSalt){
                 res.send({"status":"Login successful"})
             }
             else{

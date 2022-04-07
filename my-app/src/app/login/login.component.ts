@@ -53,11 +53,11 @@ export class LoginComponent{
   verifyLogin(serverSalt: string){
     const headers = {'content-type': 'application/json'}
 
-    var serverSalt = "";
+    var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
     var pureHashedPassword = SHA256((<HTMLInputElement>document.getElementById("passwordInput")).value)
 
-    var clientGeneratedSalt = lib.WordArray.random(5)
-    var hashedPost = { hashedPassword: SHA256(pureHashedPassword+serverSalt+clientGeneratedSalt), clientSalt: clientGeneratedSalt}
+    var clientGeneratedSalt = lib.WordArray.random(5).toString()
+    var hashedPost = {userEmail:emailGet, hashedPassword: SHA256(pureHashedPassword+serverSalt+clientGeneratedSalt).toString(), clientSalt: clientGeneratedSalt}
 
     const req = this.serverConnection.post<any>('http://localhost:6060/loginVerify', hashedPost, {'headers':headers});
     req.subscribe(response => {
