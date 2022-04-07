@@ -69,10 +69,8 @@ app.post('/loginCheck', function(req, res){
         else if (docs.email == req.body.userEmail){
             console.log("True. Returning salt")
             var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
-            collection.findOneAndUpdate({email: 'lbkr19@student.aau.dk'}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
-                if (err){
-                    console.log(err)
-                }})
+            collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
+                if (err){console.log(err)}})
             res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
         }
         else{
@@ -94,6 +92,8 @@ app.post("/loginVerify", function(req, res){
             console.log("Comparing Server:",hashedPasswordSalt)
             console.log("Comparing Client:",req.body.hashedPassword)
             if (req.body.hashedPassword == hashedPasswordSalt){
+                collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (errf, docsf) => {
+                    if (errf){console.log(errf)}})
                 res.send({"status":"Login successful"})
             }
             else{
