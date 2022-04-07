@@ -16,7 +16,7 @@ const app = express();
 var axios = require("axios");
 const xml = require("xml");
 const bodyparse = require('body-parser')
-
+var crypto = require("crypto");
 
 
 // Database
@@ -59,6 +59,9 @@ app.listen(6060, function(){
 
 app.post("/login", function(req, res){
     console.log("Login: Received request")
+
+    
+
     console.log(req.body)
     collection.find({userName: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
@@ -80,6 +83,9 @@ app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
     console.log(req.body)
     // res.json({'feedback':'Found!'})
+
+    
+    console.log(crypto.createHash('sha256').update("thisisagoodpassword123").digest('base64'))
 
     collection.find({userName: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){

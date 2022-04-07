@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SHA256 } from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +22,14 @@ export class LoginComponent{
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
     var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
 
+    var passEnc = SHA256(passwordGet)
+    var testEnc = SHA256("thisisagoodpassword123")
+
     // ENCRYPT DATA
     const headers = {'content-type': 'application/json'}
-    const bodyPost = {userEmail: emailGet, userPassword: passwordGet};
+    const bodyPost = {userEmail: emailGet, userPassword: testEnc.toString()};
+
+    document.getElementById("emailInput")!.innerHTML = passEnc.toString();
 
     const req = this.serverConnection.post('http://localhost:6060/signUp', bodyPost, {'headers':headers});
     req.subscribe(data => {});
