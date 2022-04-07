@@ -22,7 +22,14 @@ export class LoginComponent{
 
   signUp(){
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
+
     var encryptPassword = SHA256((<HTMLInputElement>document.getElementById("passwordInput")).value)
+
+    if ((emailGet.length < 3) || ((<HTMLInputElement>document.getElementById("passwordInput")).value.length) == 0){
+      document.getElementById("debugStatus")!.innerHTML = "Input an email and a password"
+      document.getElementById("feedbackStatus")!.innerHTML = ""
+      return
+    }
 
     const headers = {'content-type': 'application/json'}
     const bodyPost = {userEmail: emailGet, userPassword: encryptPassword.toString()};
@@ -36,13 +43,13 @@ export class LoginComponent{
           break;
         default:
           document.getElementById("debugStatus")!.innerHTML = "Email already linked to an existing account"
+          document.getElementById("feedbackStatus")!.innerHTML = " "
       }
     });
   }
 
   login(){
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
-    var loginStatus = "";
 
     const headers = {'content-type': 'application/json'}
 
@@ -54,6 +61,7 @@ export class LoginComponent{
           break
         default:
           document.getElementById("debugStatus")!.innerHTML = "Could not find a user with the given email"
+          document.getElementById("feedbackStatus")!.innerHTML = " "
       }
     })
   }
@@ -75,12 +83,15 @@ export class LoginComponent{
           break
         case 'User does not exist':
           document.getElementById("debugStatus")!.innerHTML = "Could not find a user with the given email"
+          document.getElementById("feedbackStatus")!.innerHTML = " "
           break
         case 'Password incorrect':
           document.getElementById("debugStatus")!.innerHTML = "Wrong password"
+          document.getElementById("feedbackStatus")!.innerHTML = " "
           break
         default:
           document.getElementById("debugStatus")!.innerHTML = "False login credentials"
+          document.getElementById("feedbackStatus")!.innerHTML = " "
       }
     });
   }

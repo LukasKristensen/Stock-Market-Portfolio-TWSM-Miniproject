@@ -82,7 +82,7 @@ h2{
 
 #loginBtn{
   margin-top: 7vh;
-  margin-left: 16vh;
+  margin-left: 10vh;
 }
 
 .loginForm input, :focus{
@@ -131,7 +131,12 @@ h2{
 }
 
 #margineSignup{
-  margin-left:13vh;
+  margin-left:3vh;
+}
+
+#signUp{
+  margin-top: 5vh;
+  margin-left: 11vw;
 }
 
 #debugStatus{
