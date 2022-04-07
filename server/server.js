@@ -85,7 +85,7 @@ app.post("/signUp", (req, res) => {
     // res.json({'feedback':'Found!'})
 
     
-    console.log(crypto.createHash('sha256').update("thisisagoodpassword123").digest('base64'))
+    console.log(crypto.createHash('SHA256').update("thisisagoodpassword123").digest('hex'))
 
     collection.find({userName: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){

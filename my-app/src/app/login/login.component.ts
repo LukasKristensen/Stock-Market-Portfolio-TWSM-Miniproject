@@ -23,7 +23,7 @@ export class LoginComponent{
     var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
 
     var passEnc = SHA256(passwordGet)
-    var testEnc = SHA256("thisisagoodpassword123")
+    var testEnc = SHA256(passwordGet)
 
     // ENCRYPT DATA
     const headers = {'content-type': 'application/json'}
