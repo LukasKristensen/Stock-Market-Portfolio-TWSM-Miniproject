@@ -23,8 +23,8 @@ var crypto = require("crypto");
 mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl.mongodb.net/twsmProject", { useNewUrlParser: true}, {useUnifiedTopology: true})
 
 let userData = new mongoose.Schema({
-    userName: {type: String},
-    portfolio: {type: String}
+    email: {type: String},
+    password: {type: String}
 })
 
 const collection = mongoose.model("userData", userData)
@@ -58,22 +58,19 @@ app.listen(6060, function(){
 
 
 app.post("/login", function(req, res){
-    console.log("Login: Received request")
+    console.log("Login: Received request",req.body)
 
-    
+    console.log(crypto.createHash('SHA256').update("thisisagoodpassword123").digest('hex'))
 
-    console.log(req.body)
-    collection.find({userName: req.body.userEmail}, function (err, docs){
+    collection.find({email: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
-            // Print error: User not found
             console.log("User does not exist in database");
             res.send({"status":"User does not exist"})
         }
         else{
-            // Direct user to main page
-            console.log("Login: User found!")
+            console.log(docs)
+            console.log("Login: User found")
             res.send({"status":"User found"})
-            //res.redirect('/main-component')
         }
     })
 
@@ -81,22 +78,18 @@ app.post("/login", function(req, res){
 
 app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
-    console.log(req.body)
-    // res.json({'feedback':'Found!'})
-
     
-    console.log(crypto.createHash('SHA256').update("thisisagoodpassword123").digest('hex'))
-
-    collection.find({userName: req.body.userEmail}, function (err, docs){
+    collection.find({email: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
-            // Create user in database
-            console.log("User does not exist in database");
-            res.send({"status":"User does not exist"})
+            console.log("MongoDB: No existing accounts with the email - Creating account")
+            collection.create({email: req.body.userEmail, password: req.body.userPassword});
+
+            res.send({"status":"Created account"})
         }
         else{
-            // Print error message: A user with the mail already exists
-            console.log("User found!")
-            res.send({"status":"User found"})
+            console.log("MongoDB: Failed to create account - Email already exists")
+
+            res.send({"status":"Email already linked to account"})
         }
     })
 })
