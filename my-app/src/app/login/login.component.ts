@@ -20,16 +20,10 @@ export class LoginComponent{
 
   signUp(){
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
-    var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
+    var encryptPassword = SHA256((<HTMLInputElement>document.getElementById("passwordInput")).value)
 
-    var passEnc = SHA256(passwordGet)
-    var testEnc = SHA256(passwordGet)
-
-    // ENCRYPT DATA
     const headers = {'content-type': 'application/json'}
-    const bodyPost = {userEmail: emailGet, userPassword: testEnc.toString()};
-
-    document.getElementById("emailInput")!.innerHTML = passEnc.toString();
+    const bodyPost = {userEmail: emailGet, userPassword: encryptPassword.toString()};
 
     const req = this.serverConnection.post('http://localhost:6060/signUp', bodyPost, {'headers':headers});
     req.subscribe(data => {});
@@ -37,16 +31,25 @@ export class LoginComponent{
 
   login(){
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
-    var passwordGet = (<HTMLInputElement>document.getElementById("passwordInput")).value;
+    var encryptPassword = SHA256((<HTMLInputElement>document.getElementById("passwordInput")).value)
 
-    // ENCRYPT DATA
     const headers = {'content-type': 'application/json'}
-    const bodyPost = {userEmail: emailGet, userPassword: passwordGet};
+    const bodyPost = {userEmail: emailGet, userPassword: encryptPassword.toString()};
 
     const req = this.serverConnection.post<any>('http://localhost:6060/login', bodyPost, {'headers':headers});
     req.subscribe(response => {
-      if (response.status == "User found"){
-        this.router.navigate(['main-component'])
+      switch (response.status){
+        case 'User found':
+          this.router.navigate(['main-component'])
+          break
+        case 'User does not exist':
+          document.getElementById("debugStatus")!.innerHTML = "Could not find a user with the given email"
+          break
+        case 'Wrong password':
+          document.getElementById("debugStatus")!.innerHTML = "Wrong password"
+          break
+        default:
+          document.getElementById("debugStatus")!.innerHTML = "False login credentials"
       }
     });
   }

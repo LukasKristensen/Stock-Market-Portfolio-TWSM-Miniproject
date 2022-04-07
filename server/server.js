@@ -67,7 +67,7 @@ app.post("/login", function(req, res){
         if(docs.length == 0){
             // Print error: User not found
             console.log("User does not exist in database");
-            res.send({"status":"User does not exist in database"})
+            res.send({"status":"User does not exist"})
         }
         else{
             // Direct user to main page
@@ -91,7 +91,7 @@ app.post("/signUp", (req, res) => {
         if(docs.length == 0){
             // Create user in database
             console.log("User does not exist in database");
-            res.send({"status":"Could not find email"})
+            res.send({"status":"User does not exist"})
         }
         else{
             // Print error message: A user with the mail already exists

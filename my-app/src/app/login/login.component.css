@@ -81,7 +81,7 @@ h2{
 }
 
 #loginBtn{
-  margin-top: 3vh;
+  margin-top: 7vh;
   margin-left: 16vh;
 }
 
@@ -132,6 +132,14 @@ h2{
 
 #margineSignup{
   margin-left:13vh;
+}
+
+#debugStatus{
+  position:absolute;
+  margin: 0vh;
+  margin-left:1vh;
+  min-width: 35vh;
+  color:crimson;
 }
 
 ::selection{
