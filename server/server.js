@@ -91,6 +91,9 @@ app.post("/loginVerify", function(req, res){
             console.log("Comparing Server:",hashedPasswordSalt)
             console.log("Comparing Client:",req.body.hashedPassword)
             if (req.body.hashedPassword == hashedPasswordSalt){
+                // clientToken = crypto.randomBytes(20).toString('hex')
+                // ^Future implementation: Return client token on verify, pass token and verify it on every request
+
                 collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (errf, docsf) => {
                     if (errf){console.log(errf)}})
                 res.send({"status":"Login successful"})
@@ -125,13 +128,23 @@ app.post("/signUp", (req, res) => {
 app.get("/ajaxPost", (req, res, next) => {
     // Load MongoDB Data + fetch with finance API ticker data
 
-    let data = `<?xml version="1.0" encoding="UTF-8"?>`;
+    let data = `<?xml version="1.0" encoding="UTF-8"?>`
     data += `<table>
                 <tr>
-                    <th>Company</th>
+                    <th><p>Company</p></th>
+                    <th><p>Ticker</p></th>
+                    <th><p>Price</p></th>
+                    <th><p>Amount</p></th>
+                    <th><p>Date</p></th>
+                    <th><p>Current Price</p></th>
                 </tr>
                 <tr>
-                    <td>Hello!</td>
+                    <td><p>Microsoft</h1></td>
+                    <td><p>MSFT</p></td>
+                    <td><p>279.83</p></td>
+                    <td><p>1</p></td>
+                    <td><p>17/04/2022</p></td>
+                    <td><p></p></td>
                 </tr>
             </table>`
             

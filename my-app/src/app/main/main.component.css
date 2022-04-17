@@ -21,6 +21,7 @@ h1{
   margin-left: 3vw;
 }
 
+
 #title{
   position: absolute;
   margin-top: 3vh;
@@ -53,5 +54,11 @@ h1{
   background-color: rgb(199, 255, 236);
   display:flex;
   justify-content: space-between;
+}
+
+#ajaxRequest{
+  background-color:rgb(241, 241, 241);
+  margin: 5vh;
+  max-width: 70vw;
 }
 
