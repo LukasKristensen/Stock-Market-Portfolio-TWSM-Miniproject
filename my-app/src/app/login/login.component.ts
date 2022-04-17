@@ -79,6 +79,7 @@ export class LoginComponent{
     req.subscribe(response => {
       switch (response.status){
         case 'Login successful':
+          localStorage.setItem('email', emailGet)
           this.router.navigate(['main-component'])
           break
         case 'User does not exist':

@@ -31,6 +31,7 @@ export class MainComponent implements OnInit{
     })
   }
 
+
   loadServerData(){
     this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
       response => {
@@ -51,7 +52,9 @@ export class MainComponent implements OnInit{
 
       }
     };
-    ajaxReq.open('GET', 'http://localhost:6060/ajaxPost', true);
+    ajaxReq.open('GET', `http://localhost:6060/ajaxPost?email=${localStorage.getItem('email')}`, true);
+    var gData = [{userName: "", Portfolio: ""}];
+
     ajaxReq.send();
   }
 }

@@ -127,6 +127,8 @@ app.post("/signUp", (req, res) => {
 
 app.get("/ajaxPost", (req, res, next) => {
     // Load MongoDB Data + fetch with finance API ticker data
+    console.log("Ajax Input:",req)
+    console.log("Query Input:",req.query)
 
     let data = `<?xml version="1.0" encoding="UTF-8"?>`
     data += `<table>
