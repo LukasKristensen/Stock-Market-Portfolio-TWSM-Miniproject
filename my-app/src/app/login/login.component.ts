@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SHA256 } from 'crypto-js';
 import { lib } from 'crypto-js';
 
+// Future Implementation: Check if username is valid by checking if characters match email
 
 @Component({
   selector: 'app-login',

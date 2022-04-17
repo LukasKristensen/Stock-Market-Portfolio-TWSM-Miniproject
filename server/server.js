@@ -1,13 +1,11 @@
-// To-do: Implement session key to verify connection
-// To-do: Display API data with AJAX
 // To-do: Create a search bar for stocks (Probably won't be implemented in this version due to API limitations)
 // To-do: Explore the 4 elements of network security mentioned at the Mini-Project Feedback Session
 
-// To-do: Login function -> User Post Request -> Server Verify on Database -> Return response and set login to true
-// To-do: Sign-up function -> Encode user credentials -> Store on database -> Return response status. Check if already exists.
-// To-do: Create portfolio management -> Add positions (Ticker, amount, date, price) -> Remove positions -> Edit positions
-
 // To-do: Prevent code being sent as exectable code: By forcing the server to read it as characters on receive
+
+// clientToken = crypto.randomBytes(20).toString('hex')
+// ^Future implementation: Return client token on verify, pass token and verify it on every request
+
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -91,8 +89,6 @@ app.post("/loginVerify", function(req, res){
             console.log("Comparing Server:",hashedPasswordSalt)
             console.log("Comparing Client:",req.body.hashedPassword)
             if (req.body.hashedPassword == hashedPasswordSalt){
-                // clientToken = crypto.randomBytes(20).toString('hex')
-                // ^Future implementation: Return client token on verify, pass token and verify it on every request
 
                 collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (errf, docsf) => {
                     if (errf){console.log(errf)}})
