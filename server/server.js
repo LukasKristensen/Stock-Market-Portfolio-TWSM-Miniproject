@@ -109,7 +109,7 @@ app.post("/signUp", (req, res) => {
     collection.find({email: req.body.userEmail}, function (err, docs){
         if(docs.length == 0){
             console.log("MongoDB: No existing accounts with the email - Creating account")
-            collection.create({email: req.body.userEmail, password: req.body.userPassword});
+            collection.create({email: req.body.userEmail, password: req.body.userPassword, Portfolio: []});
 
             res.send({"status":"Created account"})
         }
@@ -135,19 +135,9 @@ app.get("/ajaxPost", (req, res, next) => {
                     <th><p>Price</p></th>
                     <th><p>Amount</p></th>
                     <th><p>Date</p></th>
-                    <th><p>Current Price</p></th>
-                </tr>
-                <tr>
-                    <td><p>Microsoft</h1></td>
-                    <td><p>MSFT</p></td>
-                    <td><p>279.83</p></td>
-                    <td><p>1</p></td>
-                    <td><p>17/04/2022</p></td>
-                    <td><p></p></td>
-                </tr>
-            </table>`
+                </tr>`
     
-    collection.findOne({userName: req.query.email}, function (err, docs){
+    collection.findOne({email: req.query.email}, function (err, docs){
         if(err){console.log(err)}
         else{
             console.log("FullDocs:",docs)
@@ -155,12 +145,19 @@ app.get("/ajaxPost", (req, res, next) => {
 
 
             docs.Portfolio.forEach(function(Position){
-                data+=Position.Company
+                data+=`<tr>
+                            <td>${Position.Company}</td>
+                            <td>${Position.Ticker}</td>
+                            <td>${Position.Price}</td>
+                            <td>${Position.Amount}</td>
+                            <td>${Position.Date}</td>
+                        </tr>`
             })
 
 
             console.log("Sending Data:",data)
     
+            data += `</table>`
             console.log("AJAX Received")
             res.header('Content-Type', 'application/xml');
             res.status(200).send(data);

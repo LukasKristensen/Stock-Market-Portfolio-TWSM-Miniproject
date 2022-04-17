@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export class userData {
   constructor(
@@ -19,7 +20,8 @@ export class MainComponent implements OnInit{
   uData = [{userName: "", Portfolio: ""}];
 
   constructor(
-    private serverConnection: HttpClient
+    private serverConnection: HttpClient,
+    private router: Router
   ){}
 
 
@@ -56,5 +58,10 @@ export class MainComponent implements OnInit{
     var gData = [{userName: "", Portfolio: ""}];
 
     ajaxReq.send();
+  }
+
+  signOut(){
+    localStorage.removeItem('email')
+    this.router.navigate(['login'])
   }
 }
