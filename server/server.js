@@ -22,7 +22,8 @@ mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl
 let userData = new mongoose.Schema({
     email: {type: String},
     password: {type: String},
-    serverSalt: {type: String}
+    Portfolio: {type: Object},
+    serverSalt: {type: String},
 })
 
 const collection = mongoose.model("userData", userData)
@@ -145,10 +146,29 @@ app.get("/ajaxPost", (req, res, next) => {
                     <td><p></p></td>
                 </tr>
             </table>`
-            
-    console.log("AJAX Received")
-    res.header('Content-Type', 'application/xml');
-    res.status(200).send(data);
+    
+    collection.findOne({userName: req.query.email}, function (err, docs){
+        if(err){console.log(err)}
+        else{
+            console.log("FullDocs:",docs)
+            console.log("Found Portfolio:",docs.Portfolio)
+
+
+            docs.Portfolio.forEach(function(Position){
+                data+=Position.Company
+            })
+
+
+            console.log("Sending Data:",data)
+    
+            console.log("AJAX Received")
+            res.header('Content-Type', 'application/xml');
+            res.status(200).send(data);
+        }
+    })
+
+
+
 })
 
 app.get("/requestData", function(req, res){
