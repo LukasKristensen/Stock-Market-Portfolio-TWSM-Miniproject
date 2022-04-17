@@ -19,8 +19,25 @@
   <div class="content"></div>
     <div id="portfolio"></div>
     <div id="ajaxRequest"></div>
-    <button (click)="ajaxRequest()">Add New Position</button>
+
+    <button (click)="ajaxRequest()">Fetch UserData</button>
     <button>Configure Portfolio</button>
+
+    <div class="addPosition">
+      <br><br>
+      <p>Company:</p><input>
+      <br><br>
+      <p>Ticker:</p><input>
+      <br><br>
+      <p>Purchase Price:</p><input>
+      <br><br>
+      <p>Amount:</p><input>
+      <br><br>
+      <p>Date:</p><input type="date">
+      <br><br>
+      <button (click)="addPosition()">Add Position</button>
+    </div>
+
   <div class="footer"></div>
 
 

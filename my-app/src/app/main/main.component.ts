@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 export class userData {
@@ -55,9 +55,14 @@ export class MainComponent implements OnInit{
       }
     };
     ajaxReq.open('GET', `http://localhost:6060/ajaxPost?email=${localStorage.getItem('email')}`, true);
-    var gData = [{userName: "", Portfolio: ""}];
-
     ajaxReq.send();
+  }
+
+  addPosition(){
+    const headers = {'content-type': 'application/json'}
+    var postJSON = [{test:"someText"}]
+
+    this.serverConnection.post<any>("http://localhost:6060/addPosition",postJSON,{'headers':headers})
   }
 
   signOut(){
