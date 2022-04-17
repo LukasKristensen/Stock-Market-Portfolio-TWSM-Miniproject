@@ -125,14 +125,19 @@ app.post("/signUp", (req, res) => {
 app.get("/ajaxPost", (req, res, next) => {
     // Load MongoDB Data + fetch with finance API ticker data
 
-    let data = `<?xml version="1.0" encoding"UTF-8"?>`;
-    data += "<h1>Hi!</h1>"
-
-    var dataTest = [{h2: 'Hello World!'}]
-
+    let data = `<?xml version="1.0" encoding="UTF-8"?>`;
+    data += `<table>
+                <tr>
+                    <th>Company</th>
+                </tr>
+                <tr>
+                    <td>Hello!</td>
+                </tr>
+            </table>`
+            
     console.log("AJAX Received")
     res.header('Content-Type', 'application/xml');
-    res.status(200).send(xml(dataTest));
+    res.status(200).send(data);
 })
 
 app.get("/requestData", function(req, res){
