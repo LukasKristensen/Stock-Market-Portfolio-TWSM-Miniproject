@@ -97,4 +97,9 @@ export class LoginComponent{
       }
     });
   }
+
+  guest(){
+      localStorage.setItem("email","guest")
+      this.router.navigate(['main-component'])
+  }
 }
