@@ -22,7 +22,7 @@ mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl
 let userData = new mongoose.Schema({
     email: {type: String},
     password: {type: String},
-    Portfolio: {type: Object},
+    Portfolio: {type: Array},
     serverSalt: {type: String},
 })
 
@@ -91,9 +91,11 @@ app.post("/loginVerify", function(req, res){
             console.log("Comparing Client:",req.body.hashedPassword)
             if (req.body.hashedPassword == hashedPasswordSalt){
 
-                collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (errf, docsf) => {
-                    if (errf){console.log(errf)}})
-                res.send({"status":"Login successful"})
+                collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (err, docs) => {
+                    if (err){console.log(`Error finding email: ${req.body.userEmail} Error: ${err}`)}
+                    else{
+                        res.send({"status":"Login successful"})
+                    }})
             }
             else{
                 res.send({"status":"Password incorrect"})
@@ -193,4 +195,23 @@ app.get("/tickerGet", function(req, res){
     }).catch(function (err){
         console.log("Error:",err);
     })
+})
+
+app.post("/addPosition", function(req, res){
+    console.log("Body: ",req.body[0])
+
+    collection.findOne({email: req.body[0].email}, function(err, docs){
+        bData = req.body[0]    
+        console.log("AddPosition: Found email - ",docs)
+        var holdArr = docs.Portfolio
+
+        holdArr.push({"Company":bData.companyInput, "Ticker":bData.tickerInput, "Price":bData.priceInput, "Amount":bData.amountInput, "Date":bData.dateInput})
+        collection.findOneAndUpdate({email: req.body[0].email}, {$set: {Portfolio: holdArr}}, (err, docs)=>{
+            if (err){
+                console.log("Error on adding position. Err:",err)
+            }
+        })
+    
+})
+
 })

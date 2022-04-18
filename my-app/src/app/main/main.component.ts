@@ -60,9 +60,17 @@ export class MainComponent implements OnInit{
 
   addPosition(){
     const headers = {'content-type': 'application/json'}
-    var postJSON = [{test:"someText"}]
+    var email = localStorage.getItem('email')
+    var companyInput = (<HTMLInputElement>document.getElementById('companyInput')).value
+    var tickerInput = (<HTMLInputElement>document.getElementById('tickerInput')).value
+    var priceInput = (<HTMLInputElement>document.getElementById('priceInput')).value
+    var amountInput = (<HTMLInputElement>document.getElementById('amountInput')).value
+    var dateInput = (<HTMLInputElement>document.getElementById('dateInput')).value
 
-    this.serverConnection.post<any>("http://localhost:6060/addPosition",postJSON,{'headers':headers})
+    var postJSON = [{"email":email, "companyInput":companyInput, "tickerInput":tickerInput,"priceInput":priceInput,"amountInput":amountInput,"dateInput":dateInput}]
+
+    var addPositionRequest = this.serverConnection.post<any>("http://localhost:6060/addPosition",postJSON,{'headers':headers})
+    addPositionRequest.subscribe()
   }
 
   signOut(){
