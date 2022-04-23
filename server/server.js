@@ -10,7 +10,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-var axios = require("axios");
+// var axios = require("axios");
 const bodyparse = require('body-parser')
 var crypto = require("crypto");
 
@@ -57,20 +57,23 @@ app.post('/loginCheck', function(req, res){
     console.log("Login: Checking if user exists",req.body)
     
     collection.findOne({email: req.body.userEmail}, function (err, docs){
-        console.log(docs)
-        if(docs == null){
-            console.log("User does not exist in database");
-            res.send({"status":"User does not exist"})
-        }
-        else if (docs.email == req.body.userEmail){
-            console.log("True. Returning salt")
-            var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
-            collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
-                if (err){console.log(err)}})
-            res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
-        }
-        else{
-            res.send({"status":"Login credentials false"})
+        if(err){console.log(err)}
+            else{
+            console.log(docs)
+            if(docs == null){
+                console.log("User does not exist in database");
+                res.send({"status":"User does not exist"})
+            }
+            else if (docs.email == req.body.userEmail){
+                console.log("True. Returning salt")
+                var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
+                collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
+                    if (err){console.log(err)}})
+                res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
+            }
+            else{
+                res.send({"status":"Login credentials false"})
+            }
         }
     })
 })
@@ -79,24 +82,27 @@ app.post("/loginVerify", function(req, res){
     console.log("Login: Received request",req.body)
 
     collection.findOne({email: req.body.userEmail}, function (err, docs){
-        if(docs == null){
-            console.log("User does not exist in database");
-            res.send({"status":"User does not exist"})
-        }
+        if(err){console.log(err)}
         else{
-            hashedPasswordSalt = crypto.createHash('SHA256').update(docs.password+docs.serverSalt+req.body.clientSalt).digest('hex')
-            console.log("Comparing Server:",hashedPasswordSalt)
-            console.log("Comparing Client:",req.body.hashedPassword)
-            if (req.body.hashedPassword == hashedPasswordSalt){
-
-                collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (err, docs) => {
-                    if (err){console.log(`Error finding email: ${req.body.userEmail} Error: ${err}`)}
-                    else{
-                        res.send({"status":"Login successful"})
-                    }})
+            if(docs == null){
+                console.log("User does not exist in database");
+                res.send({"status":"User does not exist"})
             }
             else{
-                res.send({"status":"Password incorrect"})
+                hashedPasswordSalt = crypto.createHash('SHA256').update(docs.password+docs.serverSalt+req.body.clientSalt).digest('hex')
+                console.log("Comparing Server:",hashedPasswordSalt)
+                console.log("Comparing Client:",req.body.hashedPassword)
+                if (req.body.hashedPassword == hashedPasswordSalt){
+
+                    collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (err, docs) => {
+                        if (err){console.log(`Error finding email: ${req.body.userEmail} Error: ${err}`)}
+                        else{
+                            res.send({"status":"Login successful"})
+                        }})
+                }
+                else{
+                    res.send({"status":"Password incorrect"})
+                }
             }
         }
     })
@@ -107,6 +113,8 @@ app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
     
     collection.find({email: req.body.userEmail}, function (err, docs){
+        if(err){console.log(err)}
+        else{
         if(docs.length == 0){
             console.log("MongoDB: No existing accounts with the email - Creating account")
             collection.create({email: req.body.userEmail, password: req.body.userPassword, Portfolio: []});
@@ -117,14 +125,13 @@ app.post("/signUp", (req, res) => {
             console.log("MongoDB: Failed to create account - Email already exists")
 
             res.send({"status":"Email already linked to account"})
-        }
+        }}
     })
 })
 
 
 app.get("/ajaxPost", (req, res, next) => {
     // Load MongoDB Data + fetch with finance API ticker data
-    console.log("Ajax Input:",req)
     console.log("Query Input:",req.query)
 
     let data = `<?xml version="1.0" encoding="UTF-8"?>`
@@ -140,9 +147,7 @@ app.get("/ajaxPost", (req, res, next) => {
     collection.findOne({email: req.query.email}, function (err, docs){
         if(err){console.log(err)}
         else{
-            console.log("FullDocs:",docs)
-            console.log("Found Portfolio:",docs.Portfolio)
-
+            console.log("AJAX Received")
 
             docs.Portfolio.forEach(function(Position){
                 data+=`<tr>
@@ -155,10 +160,9 @@ app.get("/ajaxPost", (req, res, next) => {
             })
 
 
-            console.log("Sending Data:",data)
+            // console.log("Sending Data:",data)
     
             data += `</table>`
-            // console.log("AJAX Received")
             console.log("Sending AJAX Request")
             res.header('Content-Type', 'application/xml');
             res.status(200).send(data);
@@ -200,6 +204,8 @@ app.post("/addPosition", function(req, res){
     console.log("Body: ",req.body[0])
 
     collection.findOne({email: req.body[0].email}, function(err, docs){
+        if(err){console.log(err)}
+        else{
         bData = req.body[0]    
         console.log("AddPosition: Found email - ",docs)
         var holdArr = docs.Portfolio
@@ -210,7 +216,7 @@ app.post("/addPosition", function(req, res){
                 console.log("Error on adding position. Err:",err)
             }
         })
-    
+    }
 })
 
 })
