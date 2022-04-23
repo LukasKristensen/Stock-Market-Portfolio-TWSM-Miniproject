@@ -58,8 +58,32 @@ h1{
 
 #ajaxRequest{
   background-color:rgb(241, 241, 241);
-  margin: 5vh;
+
+  padding:1vh;
+  min-width: 60vw;
   max-width: 70vw;
   text-align: center;
 }
 
+.portfolio{
+  margin: 5vh;
+  position: absolute;
+}
+
+.addPosition{
+  padding: 3vh;
+  text-align: center;
+  margin-top: 5vh;
+  margin-right: 5vw;
+  margin-left: 10vw;
+  position: relative;
+  float: right;
+  background-color:rgb(241, 241, 241);
+  min-width: 25vw;
+}
+
+.addPosition button{
+  margin-top: 3vh;
+  min-height: 5vh;
+  outline: none;
+}

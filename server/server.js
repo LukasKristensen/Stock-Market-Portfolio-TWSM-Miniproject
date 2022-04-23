@@ -1,18 +1,11 @@
-// To-do: Create a search bar for stocks (Probably won't be implemented in this version due to API limitations)
-// To-do: Explore the 4 elements of network security mentioned at the Mini-Project Feedback Session
-
-// To-do: Prevent code being sent as exectable code: By forcing the server to read it as characters on receive
-
-// clientToken = crypto.randomBytes(20).toString('hex')
-// ^Future implementation: Return client token on verify, pass token and verify it on every request
-
-
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 // var axios = require("axios");
 const bodyparse = require('body-parser')
 var crypto = require("crypto");
+
+// To-do: 
 
 
 // Database
@@ -54,32 +47,31 @@ app.listen(6060, function(){
 })
 
 app.post('/loginCheck', function(req, res){
-    console.log("Login: Checking if user exists",req.body)
+    console.log("Received login request")
     
     collection.findOne({email: req.body.userEmail}, function (err, docs){
         if(err){console.log(err)}
             else{
-            console.log(docs)
-            if(docs == null){
-                console.log("User does not exist in database");
-                res.send({"status":"User does not exist"})
-            }
-            else if (docs.email == req.body.userEmail){
-                console.log("True. Returning salt")
-                var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
-                collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
-                    if (err){console.log(err)}})
-                res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
-            }
-            else{
-                res.send({"status":"Login credentials false"})
-            }
+                if(docs == null){
+                    console.log("User does not exist in database");
+                    res.send({"status":"User does not exist"})
+                }
+                else if (docs.email == req.body.userEmail){
+                    var serverGenerateSalt = crypto.randomBytes(5).toString('hex');
+                    console.log("User found. Returning server-generated salt "+serverGenerateSalt)
+                    collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: serverGenerateSalt}}, (err, docs) => {
+                        if (err){console.log(err)}})
+                    res.send({"status":"User exists", "randomSalt":serverGenerateSalt})
+                }
+                else{
+                    res.send({"status":"Login credentials false"})
+                }
         }
     })
 })
 
 app.post("/loginVerify", function(req, res){
-    console.log("Login: Received request",req.body)
+    console.log("Login: Received last request of verification",req.body)
 
     collection.findOne({email: req.body.userEmail}, function (err, docs){
         if(err){console.log(err)}
