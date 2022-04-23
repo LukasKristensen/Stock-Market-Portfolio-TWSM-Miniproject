@@ -31,6 +31,7 @@ export class MainComponent implements OnInit{
       const btnInfo = document.querySelector(".infoNav");
       btnInfo?.remove();
     })
+    this.ajaxRequest()
   }
 
 

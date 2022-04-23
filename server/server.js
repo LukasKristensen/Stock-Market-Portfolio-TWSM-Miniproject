@@ -11,7 +11,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 var axios = require("axios");
-const xml = require("xml");
 const bodyparse = require('body-parser')
 var crypto = require("crypto");
 
@@ -29,17 +28,16 @@ let userData = new mongoose.Schema({
 const collection = mongoose.model("userData", userData)
 
 
-// Finance API
-// The next 8 lines of code are generated from the API documentation at: https://rapidapi.com/alphavantage/api/alpha-vantage/
+/*
 var options = {
     method: 'GET',
     url: 'https://alpha-vantage.p.rapidapi.com/query',
     params: {function: 'GLOBAL_QUOTE', symbol: 'MSFT', datatype: 'json'},
     headers: {
       'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
-      'X-RapidAPI-Key': '25f9e821c4msh4c2a74250c635d7p135234jsn8794cb0dff14'
+      'X-RapidAPI-Key': ''
     }
-  };
+  };*/
 
 
 app.use(function(req, res, next){
@@ -160,7 +158,8 @@ app.get("/ajaxPost", (req, res, next) => {
             console.log("Sending Data:",data)
     
             data += `</table>`
-            console.log("AJAX Received")
+            // console.log("AJAX Received")
+            console.log("Sending AJAX Request")
             res.header('Content-Type', 'application/xml');
             res.status(200).send(data);
         }
@@ -170,7 +169,7 @@ app.get("/ajaxPost", (req, res, next) => {
 
 })
 
-app.get("/requestData", function(req, res){
+/*app.get("/requestData", function(req, res){
     // AJAX Request => Append positions to client
 
     console.log("Received request");
@@ -195,7 +194,7 @@ app.get("/tickerGet", function(req, res){
     }).catch(function (err){
         console.log("Error:",err);
     })
-})
+})*/
 
 app.post("/addPosition", function(req, res){
     console.log("Body: ",req.body[0])
