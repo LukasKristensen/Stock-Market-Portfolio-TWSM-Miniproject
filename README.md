@@ -16,8 +16,6 @@ Run the command: ``ng serve``
 Direct to: ``\server``<br>
 Run the command: ``node server.js``
 
-Note: The finance API key must only be used for personal/non-commercial use
-
 During the development of the application there have been errors in communicating between the client and server on public/restricted networks (AAU Create).
 
 <h2>Group</h2>
