@@ -30,7 +30,7 @@ export class LoginComponent{
     var regexMail = new RegExp('[a-z0-9]+@[a-z]+[.]+[a-z0-9]')
 
     if (!regexMail.test(emailGet)){
-      document.getElementById("debugStatus")!.innerHTML = "Input a valid email"
+      document.getElementById("debugStatus")!.innerHTML = "Invalid email input"
       document.getElementById("feedbackStatus")!.innerHTML = ""
       return
     }
