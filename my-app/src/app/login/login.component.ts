@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SHA256 } from 'crypto-js';
 import { lib } from 'crypto-js';
 
+
 // Future Implementation: Check if username is valid by checking if characters match email
 
 @Component({
@@ -26,8 +27,16 @@ export class LoginComponent{
 
     var encryptPassword = SHA256((<HTMLInputElement>document.getElementById("passwordInput")).value)
 
-    if ((emailGet.length < 3) || ((<HTMLInputElement>document.getElementById("passwordInput")).value.length) == 0){
-      document.getElementById("debugStatus")!.innerHTML = "Input an email and a password"
+    var regexMail = new RegExp('[a-z0-9]+@[a-z]+[.]+[a-z0-9]')
+
+    if (!regexMail.test(emailGet)){
+      document.getElementById("debugStatus")!.innerHTML = "Input a valid email"
+      document.getElementById("feedbackStatus")!.innerHTML = ""
+      return
+    }
+
+    else if (((<HTMLInputElement>document.getElementById("passwordInput")).value.length) == 0){
+      document.getElementById("debugStatus")!.innerHTML = "Input a password"
       document.getElementById("feedbackStatus")!.innerHTML = ""
       return
     }
