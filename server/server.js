@@ -85,7 +85,7 @@ app.post("/loginVerify", function(req, res){
                 console.log("Comparing Server:",hashedPasswordSalt)
                 console.log("Comparing Client:",req.body.hashedPassword)
                 if (req.body.hashedPassword == hashedPasswordSalt){
-
+                    console.log("Login Successful: Server and client request match")
                     collection.findOneAndUpdate({email: req.body.userEmail}, {$set: {serverSalt: ""}}, (err, docs) => {
                         if (err){console.log(`Error finding email: ${req.body.userEmail} Error: ${err}`)}
                         else{
@@ -93,6 +93,7 @@ app.post("/loginVerify", function(req, res){
                         }})
                 }
                 else{
+                    console.log("Login Unsuccessful: Request did not match the servers")
                     res.send({"status":"Password incorrect"})
                 }
             }
@@ -136,6 +137,12 @@ app.get("/ajaxPost", (req, res, next) => {
                     <th><p>Date</p></th>
                 </tr>`
     
+    if (req.query.email == 'null'){
+        console.log("AJAX Response: Invalid email")
+        res.header('Content-Type', 'application/xml');
+        res.status(200).send(`<p>Something went wrong while loading the email`);
+        return
+    }
     collection.findOne({email: req.query.email}, function (err, docs){
         if(err){console.log(err)}
         else{
@@ -194,6 +201,10 @@ app.get("/tickerGet", function(req, res){
 
 app.post("/addPosition", function(req, res){
     console.log("Body: ",req.body[0])
+    if (req.body[0].email == null){
+        console.log("Error adding position: No email found in request")
+        return;
+    }
 
     collection.findOne({email: req.body[0].email}, function(err, docs){
         if(err){console.log(err)}
