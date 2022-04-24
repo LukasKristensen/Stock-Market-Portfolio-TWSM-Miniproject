@@ -26,7 +26,6 @@ export class MainComponent implements OnInit{
 
 
   ngOnInit(): void {
-    // this.loadServerData();
     document.querySelector("#closeInfo")?.addEventListener("click", function(){
       const btnInfo = document.querySelector(".infoNav");
       btnInfo?.remove();
@@ -34,25 +33,11 @@ export class MainComponent implements OnInit{
     this.ajaxRequest()
   }
 
-
-  loadServerData(){
-    this.serverConnection.get<any>("http://localhost:6060/requestData?test").subscribe(
-      response => {
-        console.log("Data:",response);
-        this.uData = response;
-      }
-    )
-  }
-
   ajaxRequest(){
     var ajaxReq = new XMLHttpRequest();
     ajaxReq.onload = function(){
       if(this.readyState == 4 && this.status == 200){
-        // const domPars = new DOMParser();
-        // var toDom = domPars.parseFromString(this.response, "application/xml");
-
         document.getElementById('ajaxRequest')!.innerHTML = this.responseText;
-
       }
     };
     ajaxReq.open('GET', `http://localhost:6060/ajaxPost?email=${localStorage.getItem('email')}`, true);

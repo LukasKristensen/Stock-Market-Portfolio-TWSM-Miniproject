@@ -5,8 +5,6 @@ const app = express();
 const bodyparse = require('body-parser')
 var crypto = require("crypto");
 
-// To-do: 
-
 
 // Database
 mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl.mongodb.net/twsmProject", { useNewUrlParser: true}, {useUnifiedTopology: true})
@@ -123,8 +121,7 @@ app.post("/signUp", (req, res) => {
 })
 
 
-app.get("/ajaxPost", (req, res, next) => {
-    // Load MongoDB Data + fetch with finance API ticker data
+app.get("/ajaxPost", (req, res) => {
     console.log("Query Input:",req.query)
 
     let data = `<?xml version="1.0" encoding="UTF-8"?>`
@@ -157,9 +154,6 @@ app.get("/ajaxPost", (req, res, next) => {
                             <td>${Position.Date}</td>
                         </tr>`
             })
-
-
-            // console.log("Sending Data:",data)
     
             data += `</table>`
             console.log("Sending AJAX Request")
@@ -167,27 +161,9 @@ app.get("/ajaxPost", (req, res, next) => {
             res.status(200).send(data);
         }
     })
-
-
-
 })
 
-/*app.get("/requestData", function(req, res){
-    // AJAX Request => Append positions to client
-
-    console.log("Received request");
-    collection.find({userName: 'testUser'}, function (err, docs){
-        console.log("Printing:",err, docs)
-        axios.request(options).then(function (response){
-            console.log(response.data);
-        }).catch(function (err){
-            console.log("Error:",err);
-        })
-
-        res.send(docs);
-    });
-})
-
+/*
 app.get("/tickerGet", function(req, res){
     console.log("Loading ticker data");
 
@@ -219,7 +195,6 @@ app.post("/addPosition", function(req, res){
                 console.log("Error on adding position. Err:",err)
             }
         })
-    }
-})
-
+        }
+    })
 })
