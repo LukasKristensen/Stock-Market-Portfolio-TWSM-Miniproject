@@ -26,15 +26,19 @@ export class MainComponent implements OnInit{
 
 
   ngOnInit(): void {
+    // Event listener to pop-up. OnClick() remove.
     document.querySelector("#closeInfo")?.addEventListener("click", function(){
       const btnInfo = document.querySelector(".infoNav");
       btnInfo?.remove();
     })
+
+    // Load portfolio on page load
     this.ajaxRequest()
   }
 
   ajaxRequest(){
     var ajaxReq = new XMLHttpRequest();
+    // When request received: insert response
     ajaxReq.onload = function(){
       if(this.readyState == 4 && this.status == 200){
         document.getElementById('ajaxRequest')!.innerHTML = this.responseText;
@@ -53,6 +57,7 @@ export class MainComponent implements OnInit{
     var amountInput = (<HTMLInputElement>document.getElementById('amountInput')).value
     var dateInput = (<HTMLInputElement>document.getElementById('dateInput')).value
 
+    // Converts all input fields into a JSON file and sends it to the server
     var postJSON = [{"email":email, "companyInput":companyInput, "tickerInput":tickerInput,"priceInput":priceInput,"amountInput":amountInput,"dateInput":dateInput}]
 
     var addPositionRequest = this.serverConnection.post<any>("http://localhost:6060/addPosition",postJSON,{'headers':headers})

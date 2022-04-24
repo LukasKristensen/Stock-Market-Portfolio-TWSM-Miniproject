@@ -23,8 +23,10 @@ export class LoginComponent{
   signUp(){
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
 
+    // Hashes password
     var encryptPassword = SHA256((<HTMLInputElement>document.getElementById("passwordInput")).value)
 
+    // Regex email validation
     var regexMail = new RegExp('[a-z0-9]+@[a-z]+[.]+[a-z0-9]')
 
     if (!regexMail.test(emailGet)){
@@ -39,6 +41,7 @@ export class LoginComponent{
       return
     }
 
+    // Sends the hashed password to the database with the email
     const headers = {'content-type': 'application/json'}
     const bodyPost = {userEmail: emailGet, userPassword: encryptPassword.toString()};
 
@@ -56,9 +59,9 @@ export class LoginComponent{
     });
   }
 
+  // First function of logging in: Sends a request with the email to receive a server salt
   login(){
     var emailGet = (<HTMLInputElement>document.getElementById("emailInput")).value;
-
     const headers = {'content-type': 'application/json'}
 
     const checkCredentials = this.serverConnection.post<any>('http://localhost:6060/loginCheck', {userEmail: emailGet}, {'headers':headers})
@@ -74,6 +77,7 @@ export class LoginComponent{
     })
   }
 
+  // Last function of logging in: Combines the server salt, client salt and the hashed password
   verifyLogin(serverSalt: string){
     const headers = {'content-type': 'application/json'}
 
@@ -85,6 +89,7 @@ export class LoginComponent{
 
     const req = this.serverConnection.post<any>('http://localhost:6060/loginVerify', hashedPost, {'headers':headers});
     req.subscribe(response => {
+      // Case switch to give the user feedback
       switch (response.status){
         case 'Login successful':
           localStorage.setItem('email', emailGet)

@@ -6,7 +6,7 @@ const bodyparse = require('body-parser')
 var crypto = require("crypto");
 
 
-// Database
+// Connect to database
 mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl.mongodb.net/twsmProject", { useNewUrlParser: true}, {useUnifiedTopology: true})
 
 let userData = new mongoose.Schema({
@@ -16,6 +16,7 @@ let userData = new mongoose.Schema({
     serverSalt: {type: String},
 })
 
+// Define collection within database
 const collection = mongoose.model("userData", userData)
 
 
@@ -30,7 +31,7 @@ var options = {
     }
   };*/
 
-
+// Sets the access to the server
 app.use(function(req, res, next){
     res.header("Access-Control-Allow-Origin", "http://localhost:4200")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
@@ -44,6 +45,7 @@ app.listen(6060, function(){
     console.log("Server. Port 6060");
 })
 
+// First function of login check. Checks if user exists and returns a server salt if true else return error message
 app.post('/loginCheck', function(req, res){
     console.log("Received login request")
     
@@ -68,6 +70,7 @@ app.post('/loginCheck', function(req, res){
     })
 })
 
+// Last function of login check. Creates a hash with the password from the database with the client salt and user salt
 app.post("/loginVerify", function(req, res){
     console.log("Login: Received last request of verification",req.body)
 
@@ -100,6 +103,7 @@ app.post("/loginVerify", function(req, res){
 
 })
 
+// Checks if email already exists in the database, if not create a new account
 app.post("/signUp", (req, res) => {
     console.log("Sign-up: Received request")
     
@@ -109,18 +113,16 @@ app.post("/signUp", (req, res) => {
         if(docs.length == 0){
             console.log("MongoDB: No existing accounts with the email - Creating account")
             collection.create({email: req.body.userEmail, password: req.body.userPassword, Portfolio: []});
-
             res.send({"status":"Created account"})
         }
         else{
             console.log("MongoDB: Failed to create account - Email already exists")
-
             res.send({"status":"Email already linked to account"})
         }}
     })
 })
 
-
+// AJAX request: Iterates over the user's document within the database and returns it as a XML file with a table format
 app.get("/ajaxPost", (req, res) => {
     console.log("Query Input:",req.query)
 
@@ -175,6 +177,7 @@ app.get("/tickerGet", function(req, res){
     })
 })*/
 
+// Checks if the user exists in the database: if user exists append and replace the new position to the portfolio
 app.post("/addPosition", function(req, res){
     console.log("Body: ",req.body[0])
     if (req.body[0].email == null){
