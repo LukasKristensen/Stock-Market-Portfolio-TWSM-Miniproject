@@ -7,7 +7,7 @@ var crypto = require("crypto");
 
 
 // Connect to database
-mongoose.connect("mongodb+srv://exampleUser:twsmMiniproject!2022!@cluster0.flakl.mongodb.net/twsmProject", { useNewUrlParser: true}, {useUnifiedTopology: true})
+mongoose.connect("", { useNewUrlParser: true}, {useUnifiedTopology: true})
 
 let userData = new mongoose.Schema({
     email: {type: String},
