@@ -3,7 +3,7 @@
 A full-stack stock portfolio for the 6th semester course: Technologies for Web and Social Media
 
 
-<h2>Instructions:</h2>
+<h2>Instructions</h2>
 
 Have Node.JS installed
 
@@ -17,6 +17,15 @@ Direct to: ``\server``<br>
 Run the command: ``node server.js``
 
 **Note:** During the development of the application there have been errors in communicating between the client and server on public/restricted networks (AAU Create).
+
+<h2>Overview</h2>
+Flowchart of application
+
+![](flowchart.png)
+
+Screenshot of application
+
+![](application_screenshot.png)
 
 <h2>Group</h2>
 Lukas Bisgaard Kristensen
